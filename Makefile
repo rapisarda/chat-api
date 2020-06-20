@@ -1,5 +1,6 @@
 FIG=docker-compose
 CONSOLE=bin/console
+PHP=$(FIG) exec php
 
 start: build up # Install and start the project
 
@@ -15,3 +16,6 @@ build:
 up:
 	$(FIG) up -d --remove-orphans
 
+install: start
+	$(PHP) composer install
+	$(PHP) $(CONSOLE) doctrine:schema:create
