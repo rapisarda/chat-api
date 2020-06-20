@@ -18,4 +18,22 @@ up:
 
 install: start
 	$(PHP) composer install
-	$(PHP) $(CONSOLE) doctrine:schema:create
+	$(PHP) $(CONSOLE) doctrine:database:create
+
+database:
+	$(PHP) $(CONSOLE) doctrine:database:create
+
+dropdb:
+	$(PHP) $(CONSOLE) doctrine:database:drop --force
+
+cc:
+	$(PHP) $(CONSOLE) cache:clear
+
+migration:
+	$(PHP) $(CONSOLE) make:migration
+
+migrate:
+	$(PHP) $(CONSOLE) doctrine:migration:migrate
+
+schema:
+	$(PHP) $(CONSOLE) doctrine:schema:update --force
