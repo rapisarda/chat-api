@@ -33,7 +33,7 @@ migration:
 	$(PHP) $(CONSOLE) make:migration
 
 migrate:
-	$(PHP) $(CONSOLE) doctrine:migration:migrate
+	$(PHP) $(CONSOLE) doctrine:migration:migrate -n
 
 schema:
 	$(PHP) $(CONSOLE) doctrine:schema:update --force
