@@ -6,12 +6,12 @@ App\Entity\User:
       groups: ['user', 'user:write']
   collectionOperations:
     get:
-      access_control: "is_granted('ROLE_USER')"
+      security: "is_granted('ROLE_USER')"
     post: ~
   itemOperations:
     get:
-      access_control: "is_granted('ROLE_USER')"
+      security: "is_granted('ROLE_USER')"
     put:
-      access_control: "is_granted('ROLE_ADMIN') or object === user"
+      security: "is_granted('ROLE_ADMIN') or object === user"
     delete:
-      access_control: "is_granted('ROLE_ADMIN') or object === user"
+      security: "is_granted('ROLE_ADMIN') or object === user"

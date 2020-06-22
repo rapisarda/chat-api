@@ -8,18 +8,25 @@ class ApiTestCase extends \ApiPlatform\Core\Bridge\Symfony\Bundle\Test\ApiTestCa
 {
     protected static ?string $token = null;
 
+    public function setUp(): void
+    {
+        static::$token = null;
+    }
+
     protected static function createClient(array $kernelOptions = [], array $defaultOptions = []): Client
     {
         if (null !== static::$token) {
-            $defaultOptions = array_merge($defaultOptions, ['Authorization' => ['Bearer '.static::$token]]);
+            $defaultOptions = array_merge($defaultOptions, ['headers' => ['Authorization' => ['Bearer '.static::$token]]]);
         }
 
         return parent::createClient($kernelOptions, $defaultOptions);
     }
 
-    protected static function login(array $parameters): void
+    protected static function logIn(string $username = 'user1@test.com'): void
     {
-        $body = static::createClient()->request('POST', '/authentication_token', ['json' => $parameters])->toArray();
-        static::$token = $body['token'];
+        static::$token = self::bootKernel()
+            ->getContainer()
+            ->get('lexik_jwt_authentication.encoder')
+            ->encode(['username' => $username]);
     }
 }
