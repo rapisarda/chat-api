@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace App\Entity\Chat;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ApiResource()
  */
 class Chanel
 {

@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
- * @ApiResource()
  */
 class User implements UserInterface
 {
@@ -20,17 +19,25 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @var string
+     *
+     * @Groups({"user"})
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
 
     /**
+     * string[]
+     *
+     * @Groups({"user:admin"})
      * @ORM\Column(type="json")
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
+     *
+     * @Groups({"user:write"})
      * @ORM\Column(type="string")
      */
     private $password;

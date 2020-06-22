@@ -1,0 +1,8 @@
+App\Entity\Chat\Message:
+  attributes:
+    security: 'is_granted("ROLE_USER")'
+    normalization_context:
+      groups: ['message', 'message:read']
+    denormalization_context:
+      allow_extra_attributes: false
+      groups: ['message', 'message:write']

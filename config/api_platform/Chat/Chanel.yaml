@@ -1,0 +1,14 @@
+App\Entity\Chat\Chanel:
+  attributes:
+    #    security: 'is_granted("ROLE_USER")'
+    normalization_context:
+      groups: ['chanel', 'chanel:read']
+    denormalization_context:
+      allow_extra_attributes: false
+      groups: ['chanel', 'chanel:write', 'chanel:read']
+#  collectionOperations:
+#    post:
+#  itemOperations:
+#    put:
+#      access_control: "object.getUsers().contains(user) "
+
