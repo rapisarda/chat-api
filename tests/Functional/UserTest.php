@@ -24,6 +24,11 @@ class UserTest extends ApiTestCase
             'email' => $userLogin['email']
         ]);
 
+        static::createClient()->request('POST', '/authentication_token', ['json' => [
+            'email' => 'test.post@phpunit.com',
+            'password' => 'error',
+        ]]);
+        static::assertResponseStatusCodeSame(401);
         $body = static::createClient()->request('POST', '/authentication_token', ['json' => $userLogin])->toArray();
         static::assertResponseStatusCodeSame(200);
         static::assertArrayHasKey('token', $body);
