@@ -37,3 +37,8 @@ migrate:
 
 schema:
 	$(PHP) $(CONSOLE) doctrine:schema:update --force
+
+reset-db: dropdb database schema
+
+fixtures:
+	$(PHP) $(CONSOLE) doctrine:fixtures:load -n
