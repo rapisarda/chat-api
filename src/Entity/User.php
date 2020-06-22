@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity()
@@ -12,19 +13,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class User implements UserInterface
 {
     /**
+     * @var int
+     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @var string
      *
      * @Groups({"user"})
+     * @Assert\Email(mode="strict", groups={"post:user", "put:user"})
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * string[]
@@ -32,15 +36,16 @@ class User implements UserInterface
      * @Groups({"user:admin"})
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      *
+     * @Assert\NotCompromisedPassword(groups={"post:user"})
      * @Groups({"user:write"})
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     public function getId(): ?int
     {

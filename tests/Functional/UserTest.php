@@ -10,8 +10,13 @@ class UserTest extends ApiTestCase
 
     public function testCreateUserAndLogin(): void
     {
+        static::createClient()->request('POST', '/users', ['json' => [
+            'email' => 'nomail',
+            'password' => 'easy',
+        ]]);
+        static::assertResponseStatusCodeSame(400);
         $userLogin = [
-            'email' => 'test.post@phpunit.com',
+            'email' => 'test.post@test.com',
             'password' => self::PASSWORD,
         ];
         static::createClient()->request('POST', '/users', ['json' => $userLogin]);

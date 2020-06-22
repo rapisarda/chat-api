@@ -7,11 +7,13 @@ App\Entity\User:
   collectionOperations:
     get:
       security: "is_granted('ROLE_USER')"
-    post: ~
+    post:
+      validation_groups: ['post:user']
   itemOperations:
     get:
       security: "is_granted('ROLE_USER')"
     put:
       security: "is_granted('ROLE_ADMIN') or object === user"
+      validation_groups: ['put:user']
     delete:
       security: "is_granted('ROLE_ADMIN') or object === user"

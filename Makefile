@@ -42,3 +42,6 @@ reset-db: dropdb database schema
 
 fixtures:
 	$(PHP) $(CONSOLE) doctrine:fixtures:load -n
+
+phpunit:
+	$(PHP) bin/phpunit
