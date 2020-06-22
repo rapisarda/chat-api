@@ -37,4 +37,30 @@ class UserTest extends ApiTestCase
         static::login('user1@test.com');
         static::createClient()->request('GET', '/users');
     }
+
+    public function testPut()
+    {
+        static::createClient()->request('PUT', '/users/123456', ['json' => ['email' => 'error@404.com']]);
+        static::assertResponseStatusCodeSame(404);
+        static::createClient()->request('PUT', '/users/1', ['json' => ['email' => 'error@401.com']]);
+        static::assertResponseStatusCodeSame(401);
+        static::logIn();
+        static::createClient()->request('PUT', '/users/2', ['json' => ['email' => 'user1@403.com']]);
+        static::assertResponseStatusCodeSame(403);
+        static::createClient()->request('PUT', '/users/1', ['json' => ['email' => 'user1@200.com']]);
+        static::assertResponseStatusCodeSame(200);
+    }
+
+    public function testDelete()
+    {
+        static::createClient()->request('DELETE', '/users/123456', ['json' => ['email' => 'error@404.com']]);
+        static::assertResponseStatusCodeSame(404);
+        static::createClient()->request('DELETE', '/users/1', ['json' => ['email' => 'error@401.com']]);
+        static::assertResponseStatusCodeSame(401);
+        static::logIn();
+        static::createClient()->request('DELETE', '/users/2', ['json' => ['email' => 'user1@403.com']]);
+        static::assertResponseStatusCodeSame(403);
+        static::createClient()->request('DELETE', '/users/1', ['json' => ['email' => 'user1@200.com']]);
+        static::assertResponseStatusCodeSame(204);
+    }
 }
