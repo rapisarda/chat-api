@@ -1,11 +1,11 @@
-App\Entity\Chat\Chanel:
+App\Entity\Chat\Channel:
   attributes:
     #    security: 'is_granted("ROLE_USER")'
     normalization_context:
-      groups: ['chanel', 'chanel:read']
+      groups: ['channel', 'channel:read']
     denormalization_context:
       allow_extra_attributes: false
-      groups: ['chanel', 'chanel:write', 'chanel:read']
+      groups: ['channel', 'channel:write', 'channel:read']
 #  collectionOperations:
 #    post:
 #  itemOperations:

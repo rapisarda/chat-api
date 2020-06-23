@@ -22,11 +22,11 @@ class Message
     private ?int $id;
 
     /**
-     * @var Chanel
+     * @var Channel
      *
-     * @ORM\ManyToOne(targetEntity="Chanel", inversedBy="messages")
+     * @ORM\ManyToOne(targetEntity="Channel", inversedBy="messages")
      */
-    private Chanel $channel;
+    private Channel $channel;
 
     /**
      * @var User|null
@@ -51,17 +51,17 @@ class Message
     }
 
     /**
-     * @return Chanel
+     * @return Channel
      */
-    public function getChannel(): Chanel
+    public function getChannel(): Channel
     {
         return $this->channel;
     }
 
     /**
-     * @param Chanel $channel
+     * @param Channel $channel
      */
-    public function setChannel(Chanel $channel): void
+    public function setChannel(Channel $channel): void
     {
         $this->channel = $channel;
     }
