@@ -29,7 +29,6 @@ class Channel implements CreatorAware
     /**
      * @var Collection|Message[]
      *
-     * @Groups({"chanel"})
      * @ORM\OneToMany(targetEntity="App\Entity\Chat\Message", mappedBy="channel")
      */
     private Collection $messages;
@@ -37,6 +36,7 @@ class Channel implements CreatorAware
     /**
      * @var Collection|User[]
      *
+     * @Groups({"channel"})
      * @Assert\Count(min="2")
      * @ORM\ManyToMany(targetEntity="App\Entity\User")
      */
@@ -46,6 +46,7 @@ class Channel implements CreatorAware
      * @var User
      *
      * @Assert\NotNull()
+     * @Groups({"channel"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private User $creator;
