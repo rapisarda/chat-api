@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity\Chat;
 
+use App\Entity\CreatorAware;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity()
  */
-class Channel
+class Channel implements CreatorAware
 {
     /**
      * @var int|null
@@ -47,7 +48,7 @@ class Channel
      * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
-    private User $owner;
+    private User $creator;
 
     public function __construct()
     {
@@ -111,17 +112,17 @@ class Channel
     /**
      * @return User
      */
-    public function getOwner(): User
+    public function getCreator(): User
     {
-        return $this->owner;
+        return $this->creator;
     }
 
     /**
-     * @param User $owner
+     * @param User $creator
      */
-    public function setOwner(User $owner): void
+    public function setCreator(User $creator): void
     {
-        $this->users->add($owner);
-        $this->owner = $owner;
+        $this->users->add($creator);
+        $this->creator = $creator;
     }
 }

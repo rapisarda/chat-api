@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Entity\Chat;
 
+use App\Entity\CreatorAware;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class Message
+class Message implements CreatorAware
 {
     /**
      * @var int|null
@@ -33,14 +34,14 @@ class Message
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
-    private ?User $user;
+    private User $creator;
 
     /**
      * @var string|null
      *
      * @ORM\Column(type="text")
      */
-    private ?string $body;
+    private string $body;
 
     /**
      * @return int|null
@@ -67,19 +68,19 @@ class Message
     }
 
     /**
-     * @return mixed
+     * @return User
      */
-    public function getUser()
+    public function getCreator(): User
     {
-        return $this->user;
+        return $this->creator;
     }
 
     /**
-     * @param mixed $user
+     * @param User $user
      */
-    public function setUser($user): void
+    public function setCreator(User $user): void
     {
-        $this->user = $user;
+        $this->creator = $user;
     }
 
     /**
