@@ -6,3 +6,11 @@ App\Entity\Chat\Message:
     denormalization_context:
       allow_extra_attributes: false
       groups: ['message', 'message:write']
+  collectionOperations:
+    post: ~
+  itemOperations:
+    get: ~
+    put:
+      security: "is_granted('ROLE_ADMIN') or object === user"
+    delete:
+      security: "is_granted('ROLE_ADMIN') or object === user"

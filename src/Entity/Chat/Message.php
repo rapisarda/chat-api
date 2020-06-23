@@ -7,6 +7,7 @@ namespace App\Entity\Chat;
 use App\Entity\CreatorAware;
 use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity()
@@ -25,6 +26,7 @@ class Message implements CreatorAware
     /**
      * @var Channel
      *
+     * @Groups({"message"})
      * @ORM\ManyToOne(targetEntity="Channel", inversedBy="messages")
      */
     private Channel $channel;
@@ -32,6 +34,7 @@ class Message implements CreatorAware
     /**
      * @var User|null
      *
+     * @Groups({"message"})
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private User $creator;
@@ -39,6 +42,7 @@ class Message implements CreatorAware
     /**
      * @var string|null
      *
+     * @Groups({"message"})
      * @ORM\Column(type="text")
      */
     private string $body;
